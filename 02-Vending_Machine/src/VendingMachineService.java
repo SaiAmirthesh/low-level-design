@@ -21,6 +21,10 @@ public class VendingMachineService {
     }
 
     public void checkPay(){
+        if(machine.MachineState!= States.PRODUCT_SELECTED){
+            System.out.println("failure can't proceed payment");
+            return;
+        }
         machine.setMachineState(States.PAYMENT_PENDING);
         Product need = machine.findProduct(productId);
         if(need.getRate()>this.amount){
@@ -36,6 +40,10 @@ public class VendingMachineService {
     }
 
     public void dispense(){
+        if(machine.MachineState!= States.DISPENSING){
+            System.out.println("failure can't proceed dispense");
+            return;
+        }
         Product need = machine.findProduct(productId);
         System.out.println("Product " + need.productName + " is dispensed");
         need.setQty(need.getQty()-1);

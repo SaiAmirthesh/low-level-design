@@ -8,6 +8,18 @@ public class Main {
         Transaction payment = new Transaction(3,30.0);
         VendingMachineService service = new VendingMachineService(payment,vendingMachine);
         service.checkStock();
-        service.cancel();
+        service.checkPay();
+        service.dispense();
+
+        Transaction payment2 = new Transaction(3,30);
+        VendingMachineService service2 = new VendingMachineService(payment2,vendingMachine);
+        service2.checkStock();
+        service2.checkPay();
+        service2.dispense();
+
+        Transaction payment3 = new Transaction(2,30);
+        VendingMachineService service3 = new VendingMachineService(payment3,vendingMachine);
+        service3.checkStock();
+        service3.cancel();
     }
 }
