@@ -1,30 +1,35 @@
+import Parking.ParkingLot;
+import Parking.ParkingService;
 import Parking.ParkingTicket;
 import Vehicle.Vehicle;
 import Vehicle.VehicleFactory;
 import Vehicle.VehicleType;
 
+import java.util.List;
+
 class Main{
     public static void main(String[] args){
+
+        ParkingLot lot1 = new ParkingLot(1, 10);
+        ParkingLot lot2 = new ParkingLot(2, 20);
+        ParkingService parkingService = new ParkingService(List.of(lot1, lot2));
+
         Vehicle vehicle = VehicleFactory.createVehicle(VehicleType.CAR);
-        ParkingTicket ticket = new ParkingTicket();
-        ticket.checkIn(vehicle);
-        ticket.checkOut(ticket.getParkingSpotId());
+        ParkingTicket ticket = parkingService.parkVehicle(vehicle);
+        parkingService.unparkVehicle(ticket);
 
         Vehicle vehicle1 = VehicleFactory.createVehicle(VehicleType.BUS);
-        ParkingTicket ticket1 = new ParkingTicket();
-        ticket1.checkIn(vehicle1);
-        ticket1.checkOut(ticket1.getParkingSpotId());
+        ParkingTicket ticket1 = parkingService.parkVehicle(vehicle1);
+        parkingService.unparkVehicle(ticket1);
 
         Vehicle vehicle2 = VehicleFactory.createVehicle(VehicleType.BIKE);
-        ParkingTicket ticket2 = new ParkingTicket();
-        ticket2.checkIn(vehicle2);
+        ParkingTicket ticket2 = parkingService.parkVehicle(vehicle2);
 
         Vehicle vehicle3 = VehicleFactory.createVehicle(VehicleType.TRUCK);
-        ParkingTicket ticket3 = new ParkingTicket();
-        ticket3.checkIn(vehicle3);
+        ParkingTicket ticket3 = parkingService.parkVehicle(vehicle3);
 
-        ticket2.checkOut(ticket2.getParkingSpotId());
-        ticket3.checkOut(ticket3.getParkingSpotId());
+        parkingService.unparkVehicle(ticket2);
+        parkingService.unparkVehicle(ticket3);
 
     }
 }

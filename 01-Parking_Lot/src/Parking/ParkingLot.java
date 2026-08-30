@@ -5,16 +5,22 @@ import Vehicle.Vehicle;
 import java.util.ArrayList;
 
 public class ParkingLot {
-    //lets first take the capacity to be 10
-    static ArrayList<ParkingSpot> spots = new ArrayList<>(10);
+    private final int parkingLotId;
+    ArrayList<ParkingSpot> spots;
 
-    static {
-        for (int i = 1; i <= 10; i++) {
+    public ParkingLot(int parkingLotId, int capacity){
+        this.parkingLotId = parkingLotId;
+        spots = new ArrayList<>(capacity);
+        for (int i = 1; i <= capacity; i++) {
             spots.add(new ParkingSpot(i));
         }
     }
 
-    public static ParkingSpot findspot(){
+    public int getParkingLotId() {
+        return parkingLotId;
+    }
+
+    public ParkingSpot findspot(){
         ParkingSpot found = null;
         for(ParkingSpot parking : spots) {
             if (!parking.occupied) {
@@ -28,14 +34,14 @@ public class ParkingLot {
         return found;
     }
 
-    public static int checkIn(Vehicle vehicle){
+    public int checkIn(Vehicle vehicle){
         ParkingSpot toPark = findspot();
         toPark.assignParking(vehicle);
         System.out.println("Vehicle has been parked in "+toPark.parkingSpotId);
         return toPark.getParkingSpotId();
     }
 
-    public static void checkOut(int parkingSpotId){
+    public void checkOut(int parkingSpotId){
         ParkingSpot park = spots.get(parkingSpotId-1);
         park.removeParking();
         System.out.println("Parking spot "+ parkingSpotId +" cleared");
