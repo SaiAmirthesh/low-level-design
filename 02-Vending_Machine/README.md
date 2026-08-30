@@ -114,6 +114,11 @@ Machine
 ```
 
 
+### Design pattern Used
+
+1) State Design Pattern
+
+
 
 
 
