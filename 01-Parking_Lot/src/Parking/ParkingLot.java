@@ -8,6 +8,12 @@ public class ParkingLot {
     //lets first take the capacity to be 10
     static ArrayList<ParkingSpot> spots = new ArrayList<>(10);
 
+    static {
+        for (int i = 1; i <= 10; i++) {
+            spots.add(new ParkingSpot(i));
+        }
+    }
+
     public static ParkingSpot findspot(){
         ParkingSpot found = null;
         for(ParkingSpot parking : spots) {
@@ -17,7 +23,7 @@ public class ParkingLot {
             }
         }
         if(found==null){
-            throw new NullPointerException("No Parking spot found");
+            throw new IllegalStateException("No parking spot found");
         }
         return found;
     }
